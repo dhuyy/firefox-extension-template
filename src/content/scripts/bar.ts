@@ -3,7 +3,7 @@ const appendStyles = (document: Document): void => {
 
   style.innerHTML = `
       .bar {
-        display: none;
+        display: flex;
         width: 100%;
         align-items: center;
         justify-content: center;
@@ -31,15 +31,5 @@ export const prependBarElement = (): void => {
       '🎉  Service worker, content script, and popup script were responsible for rendering this bar  🎉';
 
     body.prepend(bar);
-  }
-};
-
-export const toggleBarVisibility = (): void => {
-  const bar = document.querySelector<HTMLDivElement>('div.bar');
-
-  if (bar !== null) {
-    const display = bar.style.display;
-
-    bar.style.display = display === 'flex' ? 'none' : 'flex';
   }
 };
