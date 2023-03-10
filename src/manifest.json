@@ -1,5 +1,5 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "Firefox Extension Template",
   "version": "0.0.1",
   "description": "It provides a starting point for developers to quickly create new Firefox extensions",
@@ -9,6 +9,12 @@
       "matches": ["<all_urls>"]
     }
   ],
+  "browser_action": {
+    "default_icon": "icons/32.png",
+    "default_title": "Firefox Extension Template",
+    "default_popup": "popup/popup.html"
+  },
+  "permissions": ["activeTab"],
   "icons": {
     "48": "icons/48.png",
     "96": "icons/96.png"
