@@ -25,5 +25,6 @@ module.exports = {
     '@typescript-eslint/member-delimiter-style': 0,
     '@typescript-eslint/no-non-null-assertion': 0,
     '@typescript-eslint/space-before-function-paren': 0,
+    '@typescript-eslint/no-misused-promises': 0,
   },
 };

@@ -8,30 +8,27 @@ import { useGetInitialValues } from '../hooks/get-initial-values';
 import './Popup.css';
 
 const Popup = (): JSX.Element => {
-  const [os, setOS] = useState<Nullable<chrome.runtime.PlatformOs>>(null);
+  const [os, setOS] = useState<Nullable<string>>(null);
   const [hasOptionsPageBeenOpened, setHasOptionsPageBeenOpened] =
     useState(false);
 
   useGetInitialValues({ setOS, setHasOptionsPageBeenOpened });
 
-  const handleToggleBarClick = (): void => {
-    chrome?.tabs?.query(
-      {
+  const handleToggleBarClick = async (): Promise<void> => {
+    try {
+      const tabs = await browser?.tabs?.query({
         active: true,
         currentWindow: true,
-      },
-      tabs => {
-        const tabId = tabs[0].id ?? 0;
+      });
 
-        chrome?.tabs
-          ?.sendMessage(tabId, {
-            action: Action.ToggleBarVisibility,
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      }
-    );
+      const tabId = tabs[0].id ?? 0;
+
+      await browser?.tabs?.sendMessage(tabId, {
+        action: Action.ToggleBarVisibility,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

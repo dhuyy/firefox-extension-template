@@ -9,7 +9,11 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
-    "typeRoots": ["./node_modules/@types", "./typings"],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./node_modules/web-ext-types",
+      "./typings"
+    ],
     "strictNullChecks": true
   }
 }
