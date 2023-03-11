@@ -1,10 +1,9 @@
 import type { DispatchState } from '../../common/types/react';
 import type { Nullable } from '../../common/types/utils';
 import { useAsyncEffect } from '../../common/hooks/async-effect';
-import { useStorageLocalGet } from '../../common/utils/chrome-storage';
 
 interface UseGetInitialValuesParams {
-  setOS: DispatchState<Nullable<chrome.runtime.PlatformOs>>;
+  setOS: DispatchState<Nullable<string>>;
   setHasOptionsPageBeenOpened: DispatchState<boolean>;
 }
 
@@ -15,14 +14,15 @@ export const useGetInitialValues = ({
   useAsyncEffect(
     async () => {
       try {
-        const { currentOS } =
-          await useStorageLocalGet<chrome.runtime.PlatformOs>('currentOS');
-        const { hasOptionsPageBeenOpened } = await useStorageLocalGet<boolean>(
+        const { currentOS } = await browser?.storage?.local.get('currentOS');
+        const { hasOptionsPageBeenOpened } = await browser?.storage?.local.get(
           'hasOptionsPageBeenOpened'
         );
 
-        setOS(currentOS ?? null);
-        setHasOptionsPageBeenOpened(hasOptionsPageBeenOpened ?? false);
+        setOS((currentOS as string) ?? null);
+        setHasOptionsPageBeenOpened(
+          (hasOptionsPageBeenOpened as boolean) ?? false
+        );
       } catch (error) {
         console.error(error);
       }

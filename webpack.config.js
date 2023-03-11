@@ -15,8 +15,8 @@ const config = {
   target: 'web',
   mode: process.env.NODE_ENV || 'development',
   entry: {
-    ['service-worker']: [
-      path.resolve(__dirname, 'src', 'service-worker', 'index.ts'),
+    ['background-script']: [
+      path.resolve(__dirname, 'src', 'background-script', 'index.ts'),
     ],
     ['content-scripts']: [
       path.resolve(__dirname, 'src', 'content', 'index.ts'),
